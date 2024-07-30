@@ -1,91 +1,85 @@
-// @/components/Layout/Sidebar.js
-import React, { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { SlHome } from "react-icons/sl";
+import { BsChevronDown, BsChevronRight } from "react-icons/bs";
+import MenuItem from "../MenuItem";
+import {
+  FaTshirt,
+  FaRedhat,
+  FaRobot,
+  FaDatabase,
+  FaKey,
+  FaTools
+} from "react-icons/fa";
+import { RiBarChart2Line } from "react-icons/ri";
+import { PiArrowsLeftRight } from "react-icons/pi";
+import { TbAlignBoxBottomLeft } from "react-icons/tb"
 
-import { SlHome } from 'react-icons/sl'
-import { BsInfoSquare, BsEnvelopeAt } from 'react-icons/bs'
-import { FaTshirt, FaRedhat } from 'react-icons/fa'
 
-import logo from '@/img/logo.svg'
+import logo from "@/img/logo.svg";
+
 
 export default function Sidebar({ show, setter }) {
-    const router = useRouter();
+  const router = useRouter();
 
-    // Define our base class
-    const className = "bg-black w-[250px] transition-[margin-left] ease-in-out duration-500 fixed md:static top-0 bottom-0 left-0 z-40";
-    // Append class based on state of sidebar visiblity
-    const appendClass = show ? " ml-0" : " ml-[-250px] md:ml-0";
 
-    // Clickable menu items
-    const MenuItem = ({ icon, name, route }) => {
-        // Highlight menu item based on currently displayed route
-        const colorClass = router.pathname === route ? "text-white" : "text-white/50 hover:text-white";
 
-        return (
-            <Link
-                href={route}
-                onClick={() => {
-                    setter(oldVal => !oldVal);
-                }}
-                className={`flex gap-1 [&>*]:my-auto text-md pl-6 py-3 border-b-[1px] border-b-white/10 ${colorClass}`}
-            >
-                <div className="text-xl flex [&>*]:mx-auto w-[30px]">
-                    {icon}
-                </div>
-                <div>{name}</div>
-            </Link>
-        )
-    }
+  // Define our base class
+  const className =
+    "bg-[#141414] w-[250px] transition-[margin-left] ease-in-out duration-500 fixed md:static top-0 bottom-0 left-0 z-40";
+  // Append class based on state of sidebar visibility
+  const appendClass = show ? " ml-0" : " ml-[-250px] md:ml-0";
 
-    // Overlay to prevent clicks in background, also serves as our close button
-    const ModalOverlay = () => (
-        <div
-            className={`flex md:hidden fixed top-0 right-0 bottom-0 left-0 bg-black/50 z-30`}
-            onClick={() => {
-                setter(oldVal => !oldVal);
-            }}
-        />
-    )
+  // Overlay to prevent clicks in background, also serves as our close button
+  const ModalOverlay = () => (
+    <div
+      className={`flex md:hidden fixed top-0 right-0 bottom-0 left-0 bg-black/50 z-30`}
+      onClick={() => {
+        setter((oldVal) => !oldVal);
+      }}
+    />
+  );
 
-    return (
-        <>
-            <div className={`${className}${appendClass}`}>
-                <div className="p-2 flex">
-                    <Link href="/">
-                        {/*eslint-disable-next-line*/}
-                        <img src={logo.src} alt="Company Logo" width={300} height={300} />
-                    </Link>
-                </div>
-                <div className="flex flex-col">
-                    <MenuItem
-                        name="Home"
-                        route="/"
-                        icon={<SlHome />}
-                    />
-                    <MenuItem
-                        name="T-Shirts"
-                        route="/t-shirts"
-                        icon={<FaTshirt />}
-                    />
-                    <MenuItem
-                        name="Hats"
-                        route="/hats"
-                        icon={<FaRedhat />}
-                    />
-                    <MenuItem
-                        name="About Us"
-                        route="/about"
-                        icon={<BsInfoSquare />}
-                    />
-                    <MenuItem
-                        name="Contact"
-                        route="/contact"
-                        icon={<BsEnvelopeAt />}
-                    />
-                </div>
-            </div>
-            {show ? <ModalOverlay /> : <></>}
-        </>
-    )
+  return (
+    <>
+      <div className={`${className}${appendClass}`}>
+        <div className="flex flex-col ">
+          <MenuItem
+            name="Playground"
+            icon={<TbAlignBoxBottomLeft />}
+            subOptions={[
+              { name: "Chat", route: "/playground/chat" },
+              {
+                name: "Assistance",
+                route: "/playground/assistance",
+                
+                setter:{setter}
+              },
+              {
+                name: "Completions",
+                route: "/playground/completions",
+                setter: {setter}
+              },
+            ]}
+          />
+          <MenuItem name="Assistance" route="/assistance" icon={<FaRobot />} setter={setter}/>
+          {/* <MenuItem name="About" route="/about" icon={<FaTools />} setter={setter} /> */}
+          <MenuItem
+            name="Fine Tuning"
+            route="/fine-tuning"
+            icon={<PiArrowsLeftRight />  
+            }
+            setter={setter}
+          />
+          <MenuItem name="Batches" route="/batches" icon={<FaDatabase />} setter={setter} />
+          <MenuItem name="Storage" route="/storage" icon={<FaDatabase />} setter={setter} />
+          {/* RiBarChart2Line */}
+          <MenuItem name="Usage" route="/usage" icon={<RiBarChart2Line />} setter={setter} />
+          <MenuItem name="API Keys" route="/api-keys" icon={<FaKey />} setter={setter} />
+        </div>
+      </div>
+      {show ? <ModalOverlay /> : <></>}
+    </>
+  );
 }
