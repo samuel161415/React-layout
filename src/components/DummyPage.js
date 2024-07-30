@@ -9,7 +9,7 @@ import BottomComponent from './pageContents/BottomComponent';
 export default function DummyPage({ title }) {
   return (
     <Layout pageTitle={title}>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col max-md:py-5">
         <TopComponent title={title} />
         <BottomComponent />
       </div>

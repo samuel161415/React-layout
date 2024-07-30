@@ -8,7 +8,7 @@ const BottomComponent = () => {
       <div className="flex-1 p-4 w-full border-r border-[#141414]">
         {/* Page content goes here */}
       </div>
-      <div className="w-[280px]   text-white p-4 ">
+      <div className="w-1/2 md:w-[280px]   text-white p-4 ">
         <AdjustingComponents />
       </div>
     </div>

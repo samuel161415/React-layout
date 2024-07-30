@@ -5,7 +5,7 @@ import { FaSave, FaFileExport, FaHistory, FaCopy } from 'react-icons/fa';
 
 const TopComponent = ({ title }) => {
   return (
-    <div className="flex justify-between items-center h-[60px] px-4 bg-bg-lightGray  border border-darkGray text-white">
+    <div className="flex flex-col md:flex-row max-md:mb-5 justify-between items-center h-[60px] px-4 bg-bg-lightGray  md:border border-darkGray text-white">
       <div className="text-lg">{title}</div>
       <div className="flex items-center space-x-2">
         <div className="relative">
