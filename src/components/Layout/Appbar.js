@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import logo from "@/img/logo.svg";
 import { BsChevronExpand } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
+import DropdownMenu from "../DropDownmenu";
 
 const MenuItem = ({ icon, name, route }) => {
   const router = useRouter();
@@ -21,35 +22,35 @@ const MenuItem = ({ icon, name, route }) => {
   );
 };
 
-const DropdownMenu = ({ isOpen, onClose, onSelect, selectedOption }) => {
-  return (
-    <div
-      className={`absolute p-3 top-full right-0 mt-2  bg-lightGray text-white rounded-lg shadow-lg border border-gray-700 ${isOpen ? 'block' : 'hidden'}`}
-      onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
-    >
-      <div className="flex  items-center my-1  border-gray-700 w-full">
-        <input
-          type="text"
-          placeholder="Change Project"
-          className=" bg-black text-white border border-gray-700 rounded-md px-2 py-1 flex-grow focus:border-green-600 focus:outline-none"
-        />
-        <FaSearch className="text-white ml-2" />
-      </div>
-      <div className={`flex justify-between my-1 items-center rounded-lg p-2  border-b border-gray-700 ${selectedOption === 'default' ? 'bg-green-800' : ''}`} onClick={() => { onSelect('default'); onClose(); }}>
-        <span className="mr-2">Default Project</span>
-        <FaBook />
-      </div>
-      <div className={`flex justify-between my-1 items-center rounded-lg p-2  border-b border-gray-700 ${selectedOption === 'create' ? 'bg-green-800' : ''}`} onClick={() => { onSelect('create'); onClose(); }}>
-        <span className="mr-2">Create Project</span>
-        <FaChartBar />
-      </div>
-      <div className={`flex justify-between my-1 items-center rounded-lg p-2  ${selectedOption === 'overview' ? 'bg-green-800' : ''}`} onClick={() => { onSelect('overview'); onClose(); }}>
-        <span className="mr-2">Organization Overview</span>
-        <FaCog />
-      </div>
-    </div>
-  );
-};
+// const DropdownMenu = ({ isOpen, onClose, onSelect, selectedOption }) => {
+//   return (
+//     <div
+//       className={`absolute p-3 top-full right-0 mt-2  bg-lightGray text-white rounded-lg shadow-lg border border-gray-700 ${isOpen ? 'block' : 'hidden'}`}
+//       onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+//     >
+//       <div className="flex  items-center my-1  border-gray-700 w-full">
+//         <input
+//           type="text"
+//           placeholder="Change Project"
+//           className=" bg-black text-white border border-gray-700 rounded-md px-2 py-1 flex-grow focus:border-green-600 focus:outline-none"
+//         />
+//         <FaSearch className="text-white ml-2" />
+//       </div>
+//       <div className={`flex justify-between my-1 items-center rounded-lg p-2  border-b border-gray-700 ${selectedOption === 'default' ? 'bg-green-800' : ''}`} onClick={() => { onSelect('default'); onClose(); }}>
+//         <span className="mr-2">Default Project</span>
+//         <FaBook />
+//       </div>
+//       <div className={`flex justify-between my-1 items-center rounded-lg p-2  border-b border-gray-700 ${selectedOption === 'create' ? 'bg-green-800' : ''}`} onClick={() => { onSelect('create'); onClose(); }}>
+//         <span className="mr-2">Create Project</span>
+//         <FaChartBar />
+//       </div>
+//       <div className={`flex justify-between my-1 items-center rounded-lg p-2  ${selectedOption === 'overview' ? 'bg-green-800' : ''}`} onClick={() => { onSelect('overview'); onClose(); }}>
+//         <span className="mr-2">Organization Overview</span>
+//         <FaCog />
+//       </div>
+//     </div>
+//   );
+// };
 
 
 export default function AppBar() {
