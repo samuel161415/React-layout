@@ -1,13 +1,15 @@
 // @/components/Layout/AppBar.js
 import React, { useState } from "react";
 import Link from "next/link";
-import { FaUser, FaCog, FaBook, FaChartBar } from "react-icons/fa";
-import { MdDashboard } from "react-icons/md";
+import { FaUser, FaCog } from "react-icons/fa";
 import { useRouter } from "next/router";
-import logo from "@/img/logo.svg";
 import { BsChevronExpand } from "react-icons/bs";
-import { FaSearch } from "react-icons/fa";
-import DropdownMenu from "../DropDownmenu";
+import DropdownMenu from "../dropdown_menus/DropdownMenu";
+import Image from "next/image";
+import AddIcon from "@mui/icons-material/Add";
+import CheckIcon from "@mui/icons-material/Check";
+import CorporateFareIcon from "@mui/icons-material/CorporateFare";
+import Profile from '../dropdown_menus/Profile'
 
 const MenuItem = ({ icon, name, route }) => {
   const router = useRouter();
@@ -22,99 +24,128 @@ const MenuItem = ({ icon, name, route }) => {
   );
 };
 
-// const DropdownMenu = ({ isOpen, onClose, onSelect, selectedOption }) => {
-//   return (
-//     <div
-//       className={`absolute p-3 top-full right-0 mt-2  bg-lightGray text-white rounded-lg shadow-lg border border-gray-700 ${isOpen ? 'block' : 'hidden'}`}
-//       onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
-//     >
-//       <div className="flex  items-center my-1  border-gray-700 w-full">
-//         <input
-//           type="text"
-//           placeholder="Change Project"
-//           className=" bg-black text-white border border-gray-700 rounded-md px-2 py-1 flex-grow focus:border-green-600 focus:outline-none"
-//         />
-//         <FaSearch className="text-white ml-2" />
-//       </div>
-//       <div className={`flex justify-between my-1 items-center rounded-lg p-2  border-b border-gray-700 ${selectedOption === 'default' ? 'bg-green-800' : ''}`} onClick={() => { onSelect('default'); onClose(); }}>
-//         <span className="mr-2">Default Project</span>
-//         <FaBook />
-//       </div>
-//       <div className={`flex justify-between my-1 items-center rounded-lg p-2  border-b border-gray-700 ${selectedOption === 'create' ? 'bg-green-800' : ''}`} onClick={() => { onSelect('create'); onClose(); }}>
-//         <span className="mr-2">Create Project</span>
-//         <FaChartBar />
-//       </div>
-//       <div className={`flex justify-between my-1 items-center rounded-lg p-2  ${selectedOption === 'overview' ? 'bg-green-800' : ''}`} onClick={() => { onSelect('overview'); onClose(); }}>
-//         <span className="mr-2">Organization Overview</span>
-//         <FaCog />
-//       </div>
-//     </div>
-//   );
-// };
-
-
 export default function AppBar() {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('default');
+  const [isDropdownOneOpen, setDropdownOneOpen] = useState(false);
+  const [isDropdownTwoOpen, setDropdownTwoOpen] = useState(false);
+  const [selectedOptionOne, setSelectedOptionOne] = useState("fingaroo");
+  const [selectedOptionTwo, setSelectedOptionTwo] = useState("default");
 
-  const handleDropdownToggle = () => {
-    setIsDropdownOpen(prev => !prev);
+  const handleDropdownOneToggle = () => setDropdownOneOpen(true);
+  const handleDropdownTwoToggle = () => setDropdownTwoOpen(true);
+
+  const handleCloseDropdownOne = () => setDropdownOneOpen(false);
+  const handleCloseDropdownTwo = () => setDropdownTwoOpen(false);
+
+  const handleSelectOptionOne = (optionId) => setSelectedOptionOne(optionId);
+  const handleSelectOptionTwo = (optionId) => setSelectedOptionTwo(optionId);
+
+  const getSelectedOptionTextOne = () => {
+    const options = {
+      fingaroo: "Fingaroo",
+      fingaroo1: "Fingaroo1",
+    };
+    return options[selectedOptionOne];
+  };
+  const getSelectedOptionTextTwo = () => {
+    const options = {
+      default: "Default Project",
+      create: "Create Project",
+      overview: "Organization Overview",
+    };
+    return options[selectedOptionTwo];
   };
 
-  const handleCloseDropdown = () => {
-    setIsDropdownOpen(false);
-  };
-
-  const handleSelectOption = (option) => {
-    setSelectedOption(option);
-    handleCloseDropdown();
-  };
-
-  const getSelectedOptionText = () => {
-    switch (selectedOption) {
-      case 'create':
-        return 'Create Project';
-      case 'overview':
-        return 'Organization Overview';
-      default:
-        return 'Default Project';
-    }
-  };
+  const optionOne = [
+    {
+      id: "fingaroo",
+      label: "Fingaro",
+      icon: <CheckIcon sx={{ width: "20px" }} />,
+    },
+    {
+      id: "fingaroo1",
+      label: "Fingaro1",
+      icon: <CheckIcon sx={{ width: "20px" }} />,
+    },
+  ];
+  const optionTwo = [
+    {
+      id: "default",
+      label: "Default Project",
+      icon: <CheckIcon sx={{ width: "20px" }} />,
+    },
+    {
+      id: "create",
+      label: "Create Project",
+      icon: <AddIcon sx={{ width: "20px" }} />,
+    },
+    {
+      id: "overview",
+      label: "Organization Overview",
+      icon: <CorporateFareIcon sx={{ width: "20px" }} />,
+    },
+  ];
 
   return (
     <nav className="hidden md:flex fixed top-0 left-0 right-0 h-[60px] bg-black text-white z-50 px-4">
       <div className="flex items-center gap-4">
         <Link href="/">
           {/*eslint-disable-next-line*/}
-          {/* <img src={logo.src} alt="Company Logo" width={50} height={50} /> */}
-          <div className="w-8 h-8 flex justify-center items-center font-semibold rounded-full bg-white text-darkGray">
-             F
+          <div className=" flex justify-center items-center font-semibold  text-darkGray">
+            <Image
+              src={"/assets/images/logo.png"}
+              class="object-cover h-full w-full"
+              width={100}
+              height={200}
+              alt="logo"
+            />
           </div>
         </Link>
-        <span className="">Fingaroo </span>
-        <BsChevronExpand />
-        <span className="text-white/50">/</span>
-        <button onClick={handleDropdownToggle} className="relative">
-          <span className="flex items-center">{getSelectedOptionText()}
-          <BsChevronExpand className="ml-1" /></span>
+        <div
+          onMouseEnter={handleDropdownOneToggle}
+          onMouseLeave={handleCloseDropdownOne}
+          className="relative flex justify-center items-center"
+        >
+          <span className="mr-1">{getSelectedOptionTextOne()}</span>
+          <BsChevronExpand className="ml-1" />
           <DropdownMenu
-            isOpen={isDropdownOpen}
-            onClose={handleCloseDropdown}
-            onSelect={handleSelectOption}
-            selectedOption={selectedOption}
+            isOpen={isDropdownOneOpen}
+            onClose={handleCloseDropdownOne}
+            onSelect={handleSelectOptionOne}
+            selectedOption={selectedOptionOne}
+            options={optionOne}
           />
-        </button>
+        </div>
+        <span className="text-white/50">/</span>
+        {/* Second Dropdown */}
+        <div
+          onMouseEnter={handleDropdownTwoToggle}
+          onMouseLeave={handleCloseDropdownTwo}
+          className="relative flex justify-center items-center"
+        >
+          <span className="mr-2 ">
+            {getSelectedOptionTextTwo()}
+          </span>
+          <BsChevronExpand className="ml-1" />
+          <DropdownMenu
+            isOpen={isDropdownTwoOpen}
+            onClose={handleCloseDropdownTwo}
+            onSelect={handleSelectOptionTwo}
+            selectedOption={selectedOptionTwo}
+            options={optionTwo}
+          />
+        </div>
       </div>
       <div className="flex items-center ml-auto gap-4">
-        <MenuItem name="Dashboard" route="/dashboard"  />
-        <MenuItem name="Docs" route="/docs"  />
+        <MenuItem name="Dashboard" route="/dashboard" />
+        <MenuItem name="Docs" route="/docs" />
         <MenuItem
           name="API Reference"
           route="/api-reference"
-        //   icon={<FaChartBar />}
+          //   icon={<FaChartBar />}
         />
-        <MenuItem name="" route="/settings" icon={<FaCog />} />
-        <MenuItem name="" route="/profile" icon={<FaUser />} />
+        {/* <MenuItem name="" route="/settings" icon={<FaCog />} />
+        <MenuItem name="" route="/profile" icon={<FaUser />} /> */}
+        <Profile />
       </div>
     </nav>
   );

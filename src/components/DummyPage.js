@@ -1,10 +1,10 @@
 // @/components/DummyPage.js
 import React from 'react';
-import Layout from './Layout';
+import Layout from './layout';
 // import TopComponent from './TopComponent';
 // import BottomComponent from './BottomComponent';
-import TopComponent from './pageContents/TopComponent';
-import BottomComponent from './pageContents/BottomComponent';
+import TopComponent from './ui/pageContents/TopComponent';
+import BottomComponent from './ui/pageContents/BottomComponent';
 
 export default function DummyPage({ title }) {
   return (

@@ -12,7 +12,7 @@ const TopComponent = ({ title }) => {
           <input
             type="text"
             placeholder="Presets"
-            className="pl-2 pr-8 py-1 rounded bg-lightGray focus:border-green-600 border  text-white"
+            className="p-2 pl-3 pr-8  rounded-xl bg-lightGray focus:border-green-600 border border-gray-600  text-white focus:border-none focus:ring-1 focus:outline-none"
           />
           <BsChevronExpand className="absolute right-2 top-1/2 transform -translate-y-1/2" />
         </div>

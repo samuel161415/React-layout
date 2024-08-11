@@ -1,6 +1,6 @@
 // @/components/Layout/MenuBarMobile.test.js
 import { render, screen, fireEvent } from '@testing-library/react';
-import MenuBarMobile from '@/components/Layout/MenuBarMobile';
+import MenuBarMobile from '@/components/layout/MenuBarMobile';
 
 describe('MenuBarMobile Component', () => {
   const mockSetter = jest.fn();

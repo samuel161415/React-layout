@@ -39,11 +39,6 @@ const AdjustingComponents = () => {
         value={maxTokens}
         setValue={setMaxTokens}
       />
-      <ControlBar
-        label="Frequency Penalty"
-        value={frequencyPenalty}
-        setValue={setFrequencyPenalty}
-      />
       <div>
         {" "}
         <h1 className="text-sm">
@@ -54,7 +49,7 @@ const AdjustingComponents = () => {
           type="text"
           value={sequence}
           onChange={(e) => setSquence(e.target.value)}
-          className={`w-full border rounded-lg p-2 my-2 bg-[#282727]`} // Use the CSS module class
+          className={`w-full border border-gray-600 rounded-lg focus:border-none focus:ring-1 focus:outline-none p-2 my-2 bg-[#282727]`} // Use the CSS module class
         />
       </div>
       <ControlBar label="Top P" value={topP} setValue={setTop} />
